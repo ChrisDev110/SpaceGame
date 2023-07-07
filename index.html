@@ -6,12 +6,26 @@
     <title>SpaceGame</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+        html {
+            background-color: rgb(0, 0, 20);
+            overflow: hidden;
+        }
         #j1 {
             position: absolute;
             width: 100px;
             height: 100px;
             margin-top: 50px;
             margin-left: 50px;
+            transition: width 0.5s, height 0.5s, margin-top 0.5s, margin-left 0.5s, transform 0.7s;
+            transform: rotate(0deg);
+        }
+        #j2 {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            left: 100%;
+            margin-top: 50px;
+            margin-left: -180px;
             transition: width 0.5s, height 0.5s, margin-top 0.5s, margin-left 0.5s, transform 0.7s;
             transform: rotate(0deg);
         }
@@ -29,6 +43,21 @@
             height: 100px;
             transition: all 0.5s;
         }
+        #j2d {
+            position: absolute;
+            font-family: 'Oswald', sans-serif;
+            border-radius: 20px;
+            font-size: 0;
+            color: white;
+            text-align: center;
+            background-color: rgb(132, 255, 138);
+            opacity: 0;
+            left: 100%;
+            margin-left: -100px;
+            width: 0px;
+            height: 100px;
+            transition: all 0.5s;
+        }
         #DownloadButton {
             position: absolute;
             font-family: 'Oswald', sans-serif;
@@ -42,6 +71,11 @@
             border-radius: 10px;
             font-size: 30px;
             background-color: cornflowerblue;
+            opacity: 0.5;
+            transition: opacity 0.5s;
+        }
+        #DownloadButton:hover {
+            opacity: 1;
         }
         #j1:hover {
             width: 200px;
@@ -50,19 +84,39 @@
             margin-left: 0;
             transform: rotate(360deg);
         }
+        #j2:hover {
+            width: 200px;
+            height: 200px;
+            margin-top: 0;
+            margin-left: -240px;
+            transform: rotate(360deg);
+        }
     </style>
 </head>
 <body>
+    <img src="stars.png" style="position: absolute; padding: 0; margin: 0; width: 100%; height: 100%; opacity: 0.2;">
     <div id="j1d">
         <p>soy un meteorito, obviamente te puedo matar, 
             no me puedo mover, 
             porque soy un meteorito, 
-            puedo ser de cualquier tamaño</p>
+            puedo ser de cualquier tamaño.
+        </p>
     </div>
     <img src="meteorito.png" id="j1" onmouseover="j1di()" onmouseout="j1do()">
+    <div id="j2d">
+        <p>Soy el jugador,
+            me controlas con las flechas del teclado,
+            tengo "superpoderes",
+            el primero lo consigues al llegar 20 puntos,
+            el segundo lo consigues al llegar 45 puntos.
+        </p>
+    </div>
+    <img src="nave.png" id="j2" onmouseover="j2di()" onmouseout="j2do()">
+    <p style="position: absolute; color: white; font-size: 40px; text-align: center; left: 50%; font-family: 'Oswald', sans-serif; margin-left: -175px; margin-top: -10px; opacity: 0.3;">Desarrollado por Chris</p>
     <a href="https://www.mediafire.com/file/xzwk415zsihfl9u/Juego.zip/file" id="DownloadButton">Download</a>
     <script>
         let j1d = document.getElementById("j1d")
+        let j2d = document.getElementById("j2d")
         function j1di() {
             j1d.style.marginLeft = "200px"
             j1d.style.width = "400px"
@@ -78,6 +132,22 @@
             j1d.style.opacity = "0"
             j1d.style.marginTop = "50px"
             j1d.style.fontSize = "0"
+        }
+        function j2di() {
+            j2d.style.marginLeft = "-640px"
+            j2d.style.width = "400px"
+            j2d.style.height = "200px"
+            j2d.style.opacity = "1"
+            j2d.style.marginTop = "0"
+            j2d.style.fontSize = "25px"
+        }
+        function j2do() {
+            j2d.style.marginLeft = "-170px"
+            j2d.style.width = "0px"
+            j2d.style.height = "100px"
+            j2d.style.opacity = "0"
+            j2d.style.marginTop = "50px"
+            j2d.style.fontSize = "0"
         }
     </script>
 </body>
