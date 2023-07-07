@@ -77,6 +77,26 @@
         #DownloadButton:hover {
             opacity: 1;
         }
+        #InfoB {
+            position: absolute;
+            font-family: 'Oswald', sans-serif;
+            text-align: center;
+            color: white;
+            left: 2.5%;
+            top: 90%;
+            padding-top: 15px;
+            width: 95%;
+            height: 60px;
+            margin-top: -85px;
+            border-radius: 10px;
+            font-size: 30px;
+            background-color: limegreen;
+            opacity: 0.5;
+            transition: opacity 0.5s;
+        }
+        #InfoB:hover {
+            opacity: 1;
+        }
         #j1:hover {
             width: 200px;
             height: 200px;
@@ -89,7 +109,7 @@
             height: 200px;
             margin-top: 0;
             margin-left: -240px;
-            transform: rotate(360deg);
+            transform: rotate(-360deg);
         }
     </style>
 </head>
@@ -113,7 +133,8 @@
     </div>
     <img src="nave.png" id="j2" onmouseover="j2di()" onmouseout="j2do()">
     <p style="position: absolute; color: white; font-size: 40px; text-align: center; left: 50%; font-family: 'Oswald', sans-serif; margin-left: -175px; margin-top: -10px; opacity: 0.3;">Desarrollado por Chris</p>
-    <a href="https://www.mediafire.com/file/xzwk415zsihfl9u/Juego.zip/file" id="DownloadButton">Download</a>
+    <a href="https://www.mediafire.com/file/xzwk415zsihfl9u/Juego.zip/file" id="DownloadButton">Descargar</a>
+    <a href="info.html" id="InfoB">Informacion</a>
     <script>
         let j1d = document.getElementById("j1d")
         let j2d = document.getElementById("j2d")
