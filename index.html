@@ -111,10 +111,21 @@
             margin-left: -240px;
             transform: rotate(-360deg);
         }
+        #nave {
+            position: absolute;
+            width: 75px;
+            height: 75px;
+            left: 50%;
+            top: 90%;
+            margin-left: -37px;
+            margin-top: -180px;
+        }
     </style>
 </head>
 <body>
     <img src="stars.png" style="position: absolute; padding: 0; margin: 0; width: 100%; height: 100%; opacity: 0.2;">
+    <canvas style="position: absolute; top: 0; left: 0;"></canvas>
+    <img src="nave.png" id="nave">
     <div id="j1d">
         <p>soy un meteorito, obviamente te puedo matar, 
             no me puedo mover, 
@@ -133,43 +144,77 @@
     </div>
     <img src="nave.png" id="j2" onmouseover="j2di()" onmouseout="j2do()">
     <p style="position: absolute; color: white; font-size: 40px; text-align: center; left: 50%; font-family: 'Oswald', sans-serif; margin-left: -175px; margin-top: -10px; opacity: 0.3;">Desarrollado por Chris</p>
-    <a href="https://www.mediafire.com/file/xzwk415zsihfl9u/Juego.zip/file" id="DownloadButton">Descargar</a>
-    <a href="info.html" id="InfoB">Informacion</a>
+    <a href="https://www.mediafire.com/file/xzwk415zsihfl9u/Juego.zip/file" id="DownloadButton">Descargar</a> <a href="info.html" id="InfoB">Informacion</a>
     <script>
-        let j1d = document.getElementById("j1d")
-        let j2d = document.getElementById("j2d")
-        function j1di() {
-            j1d.style.marginLeft = "200px"
+        let j1d = document.getElementById("j1d"); let j2d = document.getElementById("j2d")
+
+        function j1di() {j1d.style.marginLeft = "200px"
             j1d.style.width = "400px"
             j1d.style.height = "200px"
             j1d.style.opacity = "1"
             j1d.style.marginTop = "0"
-            j1d.style.fontSize = "25px"
-        }
-        function j1do() {
-            j1d.style.marginLeft = "150px"
+            j1d.style.fontSize = "25px"}
+        function j1do() {j1d.style.marginLeft = "150px"
             j1d.style.width = "0px"
             j1d.style.height = "100px"
             j1d.style.opacity = "0"
             j1d.style.marginTop = "50px"
-            j1d.style.fontSize = "0"
-        }
-        function j2di() {
-            j2d.style.marginLeft = "-640px"
+            j1d.style.fontSize = "0"}
+        function j2di() {j2d.style.marginLeft = "-640px"
             j2d.style.width = "400px"
             j2d.style.height = "200px"
             j2d.style.opacity = "1"
             j2d.style.marginTop = "0"
-            j2d.style.fontSize = "25px"
-        }
-        function j2do() {
-            j2d.style.marginLeft = "-170px"
+            j2d.style.fontSize = "25px"}
+        function j2do() {j2d.style.marginLeft = "-170px"
             j2d.style.width = "0px"
             j2d.style.height = "100px"
             j2d.style.opacity = "0"
             j2d.style.marginTop = "50px"
-            j2d.style.fontSize = "0"
+            j2d.style.fontSize = "0"}
+
+        let canvas = document.querySelector("canvas")
+        let ctx = canvas.getContext("2d")
+
+        let nave = document.getElementById("nave"); let naveH = 50
+        let keys = []; let md = false
+
+        let bullets = []; let bulletTimer = 0
+
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+
+        window.onresize = (e) => {
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
         }
+
+        window.onkeydown = (e) => keys[e.key] = true
+        window.onkeyup = (e) => keys[e.key] = false
+        window.onmousedown = (e) => md = true
+        window.onmouseup = (e) => md = false
+        window.setInterval((e) => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height)
+            bulletTimer += 0.1
+            if (bulletTimer > 1.2) {
+                bulletTimer = 0
+                if (md) bullets.push({x: (naveH / 100) * canvas.width, y: 0})
+            }
+            for (let i = 0; i < bullets.length; i += 1) {
+                let bullet = bullets[i]
+                bullet.y -= 10
+                ctx.fillStyle = "red"
+                ctx.fillRect(bullet.x - 7, bullet.y - 10 + canvas.height/1.1 - 180, 15, 30)
+                if (bullet.y < -canvas.height) {
+                    bullets.splice(i, 1)
+                }
+            }
+            if (keys["ArrowLeft"]) naveH -= 0.5
+            if (keys["ArrowRight"]) naveH += 0.5
+            if (naveH < 0) naveH = 0
+            if (naveH > 100) naveH = 100 
+            nave.style.left = naveH + "%"
+        }, 16)
     </script>
 </body>
 </html>
